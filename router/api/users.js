@@ -3,6 +3,9 @@ const router=express.Router();
 const gravatar=require('gravatar');
 const bcrypt=require('bcrypt');
 const {check, validationResult}=require('express-validator');
+const jwt=require('jsonwebtoken');
+const config=require('config');
+
 
 const UserModel = require('../../models/users');
 
@@ -43,9 +46,21 @@ router.post('/',[
         const salt=await bcrypt.genSalt(10);
         user.password=await bcrypt.hash(password,salt);
         console.log(user.password);
-        await user.save();
+        // await user.save();
 
         //Return jsonWebToken
+        const payLoad={
+            user:{
+                id:user.id,
+                name:user.name
+            }
+        }
+        jwt.sign(payLoad, config.get('jwtSecret'), {expiresIn:360000}, (error, token)=>{
+            if(error) throw error
+            // res.json({token})
+            console.log(token);
+        });
+
         console.log(user);
         res.send('User Register!');
 
