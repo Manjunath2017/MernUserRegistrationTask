@@ -56,7 +56,7 @@ router.post('/',[
         }
         jwt.sign(payLoad, config.get('jwtSecret'), {expiresIn:360000}, (error, token)=>{
             if(error) throw error
-            console.log(token, 'line 61');
+            console.log(token, req.body, 'line 61');
             res.json({token})
         });
 

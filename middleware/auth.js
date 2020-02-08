@@ -16,7 +16,8 @@ module.exports=(req, res, next)=>{
         const decoded=jwt.verify(token, config.get('jwtSecret'));
         // console.log(decoded, 'decoded', 'middleware line 13');
 
-        res.sendUserData=decoded.userData;
+        res.authUserData=decoded.userData; ////use this value is next function
+        //res.user=decoded.userData
         next();
 
     }catch(error){

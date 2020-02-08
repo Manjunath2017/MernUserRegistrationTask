@@ -9,8 +9,8 @@ const config=require('config');
 
 router.get('/', auth, async(req,res)=>{ 
     try{
-        // console.log(res.sendUserData, 'auth.js line 7'); 
-        const user=await UserModel.findById(res.sendUserData.id).select('-password');
+        // console.log(res.authUserData, 'auth.js line 7'); 
+        const user=await UserModel.findById(res.authUserData.id).select('-password');
         res.json(user);
     }catch(error){
         console.error(error.message);

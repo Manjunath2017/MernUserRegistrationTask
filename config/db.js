@@ -9,6 +9,7 @@ const connectDB=async()=>{
                 useNewUrlParser: true,
                 useUnifiedTopology: true,
                 useCreateIndex: true, // (node:4298) DeprecationWarning: collection.ensureIndex is deprecated. Use createIndexes instead. 
+                useFindAndModify:false
             });
         console.log(`MongoDB connected!`);
     }catch(e){
