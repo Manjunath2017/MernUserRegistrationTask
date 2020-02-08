@@ -2,7 +2,7 @@ const express=require('express');
 const router=express.Router();
 
 const ProfileModel=require('../../models/profile');
-const User=require('../../models/users');
+const userModel=require('../../models/users');
 const auth=require('../../middleware/auth');
 const {check, validationResult}=require('express-validator');
 
@@ -87,7 +87,17 @@ router.post('/',[auth, [
     // res.send(profileFields.skills);
 });
 ////////////////////FE//////////////////////////
-
+//// @Route GET localhost:5000/api/profile/
+router.get('/', async(req,res)=>{
+    try{
+        const profiles= await ProfileModel.find().populate('user', ['name', 'avatar']); //get only name and avatar field from user collection
+        // console.log(profiles);
+        res.json(profiles);
+    }catch(error){
+        console.error(error.message);
+        res.status(500).send('Server Error!');
+    }
+})
 
 module.exports=router;
 
