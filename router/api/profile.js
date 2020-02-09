@@ -1,5 +1,6 @@
 const express=require('express');
 const router=express.Router();
+const mongoose=require('mongoose');
 
 const ProfileModel=require('../../models/profile');
 const userModel=require('../../models/users');
@@ -23,7 +24,7 @@ router.get('/me', auth, async (req,res)=>{
         res.status(500).send('Server Error!')
     };
 });
-////////////////////FE//////////////////////////
+////////////////////localhost:5000/api/profile/me/ ends//////////////////////////
 
 //// @route post /api/profile/
 router.post('/',[auth, [
@@ -86,7 +87,8 @@ router.post('/',[auth, [
     }
     // res.send(profileFields.skills);
 });
-////////////////////FE//////////////////////////
+//////////////////// POST--> localhost:5000/api/profile///////////////////////////
+
 //// @Route GET localhost:5000/api/profile/
 router.get('/', async(req,res)=>{
     try{
@@ -97,7 +99,30 @@ router.get('/', async(req,res)=>{
         console.error(error.message);
         res.status(500).send('Server Error!');
     }
-})
+});
+//////////////////// GET--> localhost:5000/api/profile///////////////////////////
+
+
+//// @Route GET localhost:5000/api/profile/user/user:user_id/
+router.get('/user/:user_id', async(req,res)=>{
+    try{
+        // console.log(req.params.user_id, 'line 108');
+        const profile= await ProfileModel.findOne({user:req.params.user_id})
+        .populate('user', ['name', 'avatar']); //get only name and avatar field from user collection
+        // console.log(profiles);
+
+        if(!profile) return res.status(400).json({msg:'Profile not found!'});
+        res.json(profile);
+
+    }catch(error){
+        console.error(error.kind);
+        if(error.kind == 'ObjectId'){
+            return res.status(400).json({msg:'Profile not found!'})
+        }
+        res.status(500).send('Server Error!');
+    }
+});
+
+//////////////////// GET--> localhost:5000/api/user/user:user_id///////////////////////////
 
 module.exports=router;
-
