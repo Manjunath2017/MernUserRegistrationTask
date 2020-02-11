@@ -174,7 +174,23 @@ router.put('/experience',[auth,[
     }
 });
 
+router.delete('/experience/:exp_id', auth, async(req,res)=>{
+    try{
+        ////Get data
+        const profile=await ProfileModel.findOne({user:res.authUserData.id});
 
+        //// Get remove index
+        const removeIndex=profile.experience.map(item => item.id).indexOf(req.params.exp_id);
+        // console.log(removeIndex);
+        profile.experience.splice(removeIndex, 1);
+        await profile.save();
+        res.json(profile);
+
+    }catch(error){
+        console.error(error.message);
+        res.status(500).send('Server Error, experience');
+    }
+});
 
 
 module.exports=router;
