@@ -125,21 +125,56 @@ router.get('/user/:user_id', async(req,res)=>{
     }
 });
 
-//////////////////// GET--> localhost:5000/api/profile////////////////////////////
-//// @Route GET localhost:5000/api/profile/
+//////////////////// delete--> localhost:5000/api/profile////////////////////////////
+//// @Route delete localhost:5000/api/profile/
+//// Delete user and profile 
 router.delete('/', auth, async(req,res)=>{
     try{
-        console.log(res.authUserData, 'req,authUserData.id profile.js');
-        // Remove profile  
+        console.log(res,'response!')
+        //// Remove profile  
         let deleteProfile=await ProfileModel.findOneAndRemove({user:res.authUserData.id});
-        // Remove user
+        //// Remove user
         let deleteUser=await userModel.findOneAndRemove({_id:res.authUserData.id});
 
-        console.log(deleteProfile, deleteUser, 'line 137 profile.js', res.authUserData.id);
+        // console.log(deleteProfile, deleteUser, 'line 137 profile.js', res.authUserData.id);
         res.json({msg:'User deleted!'});
     }catch(error){
         console.error(error.message);
         res.status(500).send('delete, Server Error !');
     }
 });
+//////////////////// put-->  localhost:5000/api/profile/experience////////////////////////////
+////update(Add) profile experience
+//
+router.put('/experience',[auth,[
+        check('title', 'Title is required!'  ).not().isEmpty(),
+        check('company', 'company is required!'  ).not().isEmpty(),
+        check('from', 'From date is required!'  ).not().isEmpty(),
+    ]
+],async (req, res)=>{
+    // console.log('experience!');
+    const errors=validationResult(req);
+    if(!errors.isEmpty()){
+        return res.status(400).json({errors:errors.array()});
+    }
+    const{title, company, location, from, to, current, description}=req.body;
+    const newExp={ title, company, location, from, to, current, description};
+
+    try{
+        const profile=await ProfileModel.findOne({user:res.authUserData.id});
+        profile.experience.unshift(newExp); //unshift is like push() but it'll insert at beginning.
+        
+        const result=await profile.save();
+        console.log(result);
+        res.json(result);
+
+    }catch(error){
+        console.error(error.message);
+        res.status(500).send('Server Error!');
+    }
+});
+
+
+
+
 module.exports=router;
