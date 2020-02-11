@@ -7,6 +7,9 @@ const bcrypt=require('bcrypt');
 const jwt=require('jsonwebtoken');
 const config=require('config');
 
+
+////.................get data using token........................
+//// localhost:5000/api/auth/
 router.get('/', auth, async(req,res)=>{ 
     try{
         // console.log(res.authUserData, 'auth.js line 7'); 
@@ -18,7 +21,9 @@ router.get('/', auth, async(req,res)=>{
     }
 });
 
-//.................Authenticate user & get token..................
+////.................Authenticate user & get token..................
+//// User login
+//// localhost:5000/api/auth/
 router.post('/',[
     check('email', 'Please include a valid email').isEmail(),
     check('password', 'Password is required!').exists()
@@ -28,7 +33,7 @@ router.post('/',[
     if(!errors.isEmpty()){
         return res.status(400).json({errors:errors.array()});
     }
-    const { email, password}=req.body
+    const { email, password}=req.body;
 
     try{
         //// see if user exists
