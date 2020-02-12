@@ -1,6 +1,10 @@
 const express=require('express');
 const router=express.Router();
 const mongoose=require('mongoose');
+const request=require('request');
+const config=require('config');
+
+
 
 const ProfileModel=require('../../models/profile');
 const userModel=require('../../models/users');
@@ -184,6 +188,8 @@ router.delete('/experience/:exp_id', auth, async(req,res)=>{
         //// Get remove index[]
         const removeIndex=profile.experience.map(item => item.id).indexOf(req.params.exp_id);
         // console.log(removeIndex);
+        
+        ////splice (index_positionOfAnArray, number of element to delete) ... https://www.youtube.com/watch?v=64Ctq_n_BUc
         profile.experience.splice(removeIndex, 1);
         await profile.save();
         res.json(profile);
@@ -240,7 +246,7 @@ router.delete('/school/:edu_id', auth, async(req,res)=>{
         //// Get remove index[]
         const removeIndex=profile.education.map(item => item.id).indexOf(req.params.edu_id); //// existing, deleting _id
         // console.log(removeIndex, 'removeIndex line 240');
-
+     ////splice (index_positionOfAnArray, number of element to delete) ... https://www.youtube.com/watch?v=64Ctq_n_BUc
         profile.education.splice(removeIndex, 1);
         await profile.save();
         res.json(profile);
@@ -250,4 +256,31 @@ router.delete('/school/:edu_id', auth, async(req,res)=>{
         res.status(500).send('Server Error, /school');
     }
 });
+
+////Get user repository from gitHub
+//////////////////// get-->  localhost:5000/api/profile/github/:username////////////////////////////
+router.get('/github/:username', (req,res)=>{
+    try{
+        const options={
+            uri:`https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc&client_id=${config.get('githubClientID')}&client_secret=${config.get('githubClientSecret')}`
+            ,method:"GET",
+            headers:{'user-agent':'node.js'}
+        };
+
+        request(options, (error,response, body)=>{
+            if(error) console.error(error);
+
+            if(response.statusCode !== 200){
+                return res.status(404).json({msg:'No gitHub profile found!'});
+            }
+            // console.log(JSON.parse(body).length, '---', `https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc&client_id=${config.get('githubClientID')}&client_secret=${config.get('githubClientSecret')}`);
+            res.json(JSON.parse(body));
+        })
+    }catch(error){
+        console.error(error.message);
+        req.status(500).send('Server Error, gitHub/:username ');
+    }
+})
+
+
 module.exports=router;

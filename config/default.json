@@ -1,4 +1,6 @@
 {
     "mongoURI":"mongodb+srv://Manjunath12345:Manjunath12345@cluster0-n9mft.mongodb.net/mernstack?retryWrites=true&w=majority",
-    "jwtSecret":"M_&*ThisIsMySecretCode$#!_J"
+    "jwtSecret":"M_&*ThisIsMySecretCode$#!_J",
+    "githubClientID":"Iv1.bc380d7f1c792d09",
+    "githubClientSecret":"98cb8c5fffbb676bcdbe421aed2c79b43bd7eeca"
 }
