@@ -9,6 +9,8 @@ const {check, validationResult}=require('express-validator');
 const auth =require('../../middleware/auth');
 
 
+//// @route POST --> localhost:5000/api/posts/
+//// Add a post on timeline 
 router.post('/',  [auth, [
     check('text', 'text is required!').not().isEmpty()
 ]
@@ -33,9 +35,22 @@ router.post('/',  [auth, [
         
     }catch(error){
         console.error(error.message);
-        res.status(500).send('Server error, Post');
+        res.status(500).send('Server error, addPost');
+    }
+});
+
+//// @route GET --> localhost:5000/api/posts/
+//// Get all posts 
+router.get('/', auth, async(req,res)=>{
+    try{
+        const allPosts=await postModel.find({}).sort({date:-1})
+        res.send(allPosts);
+    }catch(error){
+        console.error(error.message);
+        res.status(500).send('Server error, get allPost')
     }
 
 });
+
 
 module.exports=router;
