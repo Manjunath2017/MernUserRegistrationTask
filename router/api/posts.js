@@ -1,5 +1,6 @@
 const express=require('express');
 const router=express.Router();
+const mongoose=require('mongoose');
 
 const postModel=require('../../models/post');
 const profileModel=require('../../models/profile');
@@ -49,8 +50,27 @@ router.get('/', auth, async(req,res)=>{
         console.error(error.message);
         res.status(500).send('Server error, get allPost')
     }
-
 });
 
+//// @route GET --> localhost:5000/api/posts/
+//// Get single post
+router.get('/:id', auth, async(req,res)=>{
+    try{
+        // console.log(req.params.id, 'req.param.id');
+        const post=await postModel.findById(req.params.id);
+        if(!post){
+            return res.status(404).json({msg:'Post not found! (!post)'})
+        }
+        res.send(post);
+    }catch(error){
+        console.error(error.message);
+        ////error in console Cast to ObjectId failed for value "5e4548c79b16543d506d1cb7a" at path "_id" for model "posts"
+        //// to get rid of error use ---> const mongoose=require('mongoose');
+        if(error.kind==='ObjectId'){
+            return res.status(404).json({msg:'Post not found! '+error.kind});
+        }
+        res.status(500).send(error)
+    } 
+});
 
 module.exports=router;
