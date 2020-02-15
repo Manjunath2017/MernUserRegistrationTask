@@ -59,8 +59,9 @@ router.get('/:id', auth, async(req,res)=>{
         // console.log(req.params.id, 'req.param.id');
         const post=await postModel.findById(req.params.id);
         if(!post){
-            return res.status(404).json({msg:'Post not found! (!post)'})
+            return res.status(404).json({msg:'Post not found! (!post)'});
         }
+
         res.send(post);
     }catch(error){
         console.error(error.message);
@@ -105,4 +106,50 @@ router.delete('/:id', auth, async(req,res)=>{
     }
 });
 
+//// @route PUT --> localhost:5000/api/posts/like/:id
+//// Like the post  
+router.put('/like/:id', auth, async(req,res)=>{
+    try{
+        const getPost=await postModel.findById(req.params.id);
+        // console.log(getPost);
+
+        //// check if the user already liked
+        if(getPost.likes.filter(like => like.user.toString() === res.authUserData.id).length>0){
+            return res.status(400).send({msg:'Post already liked!'}); ////filter 'll return a new array with all elements which are matched(true condition)
+        }
+        
+        getPost.likes.unshift({user:res.authUserData.id});
+        await getPost.save();
+
+        res.send(getPost.likes);
+    }catch(error){
+        console.error(error.message);
+        res.status(500).send('Server error, get allPost')
+    }
+});
+
+//// @route PUT --> localhost:5000/api/posts/unlike/:id
+//// unLike the post  
+router.put('/unlike/:id', auth, async(req,res)=>{
+    try{
+        const getPost=await postModel.findById(req.params.id);
+        // console.log(getPost);
+
+        //// check if the user already liked
+        if(getPost.likes.filter(like => like.user.toString() === res.authUserData.id).length === 0){
+            return res.status(400).send({msg:'Post not liked!'}); ////filter 'll return a new array with all elements which are matched(true condition)
+        }
+        //index to remove
+        const getPostIndexToRemove=getPost.likes.map( remove=> remove.user.toString()).indexOf(res.authUserData.id);
+        // console.log(getPostIndexToRemove);
+
+        getPost.likes.splice(getPostIndexToRemove, 1); ////remove the element
+        await getPost.save();
+
+        res.send(getPost.likes);
+    }catch(error){
+        console.error(error.message);
+        res.status(500).send('Server error, get allPost');
+    }
+});
 module.exports=router;
