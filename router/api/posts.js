@@ -13,8 +13,8 @@ const auth =require('../../middleware/auth');
 //// @route POST --> localhost:5000/api/posts/
 //// Add a post on timeline 
 router.post('/',  [auth, [
-    check('text', 'text is required!').not().isEmpty()
-]
+        check('text', 'text is required!').not().isEmpty()
+    ]
 ], async(req,res)=>{
     const errors=validationResult(req);
     if(!errors.isEmpty){
@@ -29,7 +29,7 @@ router.post('/',  [auth, [
             avatar:user.avatar,
             user:user.id
         });
-        console.log(user, newPost);
+        // console.log(user, newPost);
 
         const post=await newPost.save();
         res.json(post);
@@ -71,6 +71,38 @@ router.get('/:id', auth, async(req,res)=>{
         }
         res.status(500).send(error)
     } 
+});
+//// @route DELETE --> localhost:5000/api/posts/
+//// Delete a post by id
+router.delete('/:id', auth, async(req,res)=>{
+    try{
+
+        const findPost=await postModel.findById(req.params.id);
+       
+        // console.log(req.params.id, '......', findPost);
+        
+        //// if post ! exist
+        if(!findPost){
+            return res.status(404).send({msg:'Post not found!'})
+        }
+ 
+        // //// check user ID and loginID, if match delete 'else' can't delete other's post
+        // //// FindPost.user.toString() convert to string 
+        // console.log(res.authUserData.id === findPost.user.toString());
+        
+        if(findPost.user.toString() !== res.authUserData.id ){
+            return res.status(401).json({msg:'User not authorized to delete post!'})
+        }
+        await findPost.remove();
+        
+        res.send({msg:'Post deleted'});
+    }catch(error){
+        console.error(error.message);
+        if(error.kind === 'ObjectId'){
+            return res.status(404).json({msg:'Post not found to delete(error.kind)'})
+        }
+        res.status(500).send('Server error, delete single post');
+    }
 });
 
 module.exports=router;

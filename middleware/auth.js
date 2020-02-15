@@ -4,7 +4,6 @@ const config=require('config');
 module.exports=(req, res, next)=>{
     ////Get token from header
     const token=req.header('auth-token-anyName');
-    
     ////Check if not token
     if(!token)
         return res.status(401).json({message:'No token, authorization denied!'});
