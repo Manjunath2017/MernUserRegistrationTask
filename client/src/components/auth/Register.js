@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import {Link} from 'react-router-dom';
+import axios from 'axios';
 
 const Register = () => {
 const [formData, setFormData]=useState({
@@ -10,16 +11,29 @@ const [formData, setFormData]=useState({
 });
 const {name, email, password, password2}=formData;
 const onChange=(e)=>{
-    // e.preventDefault();
     setFormData({...formData, [e.target.name]:e.target.value})
-    console.log(formData);
 }
-const onSubmit=(e)=>{
+const onSubmit= async e=>{
     e.preventDefault();
     if(password !== password2){
         return console.log('password do not match!');
     }
-    console.log(formData);
+    // console.log(formData);
+    const newUser={name, email, password, password2};
+    // console.log(newUser);
+    const body={...newUser};
+    try{
+        const config={
+            headers:{
+                'Content-Type':'application/json'
+            }
+        };
+        const res=await axios.post('/api/users/', body, config);
+        console.log(res.data);
+
+    }catch(error){
+        console.error(error.response.data.errors);
+    }
 }
     return (
         <Fragment>
@@ -27,10 +41,10 @@ const onSubmit=(e)=>{
             <p className="lead"><i className="fas fa-user"></i> Create Your Account</p>
             <form className="form" onSubmit={e=>onSubmit(e) }>
                 <div className="form-group">
-                    <input type="text" placeholder="Name" name="name" value={name} onChange={e => onChange(e) }/>
+                    <input type="text" placeholder="Name" required name="name" value={name} onChange={e => onChange(e) }/>
                 </div>
                 <div className="form-group">
-                    <input type="email" placeholder="Email Address" name="email" value={email} onChange={e => onChange(e) } />
+                    <input type="email" placeholder="Email Address" required name="email" value={email} onChange={e => onChange(e) } />
                     <small className="form-text">This site uses Gravatar so if you want a profile image, use a Gravatar email</small>
                 </div>
                 <div className="form-group">

@@ -44,7 +44,7 @@ router.post('/',[
         //// Encrypt password
         const salt=await bcrypt.genSalt(10);
         user.password=await bcrypt.hash(password,salt);
-        console.log(user.password);
+        // console.log(user.password);
         await user.save();
 
         //// Return jsonWebToken
@@ -56,7 +56,7 @@ router.post('/',[
         }
         jwt.sign(payLoad, config.get('jwtSecret'), {expiresIn:360000}, (error, token)=>{
             if(error) throw error
-            console.log(token, req.body, 'line 61');
+            // console.log(token, req.body, 'line 61');
             res.json({token})
         });
 

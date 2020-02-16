@@ -9,7 +9,7 @@ const config=require('config');
 
 
 ////.................get data using token........................
-//// localhost:5000/api/auth/
+//// localhost:5000/api/auth/ login
 router.get('/', auth, async(req,res)=>{ 
     try{
         // console.log(res.authUserData, 'auth.js line 7'); 
