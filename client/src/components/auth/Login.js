@@ -23,7 +23,7 @@ const onSubmit= async e=>{
                 'Content-Type':'application/json'
             }
         };
-        const res=await axios.post('/api/auth/', body, config);
+        const res=await axios.post('api/auth/', body, config);
         console.log(res.data);
 
     }catch(error){
@@ -47,7 +47,6 @@ const onSubmit= async e=>{
             <p className="my-1">
                 Don't have an account? <Link to="login">Sign In</Link>
             </p>
-
         </Fragment> 
     )
 }

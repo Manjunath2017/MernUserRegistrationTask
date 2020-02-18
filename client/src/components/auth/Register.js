@@ -1,8 +1,10 @@
 import React, { Fragment, useState } from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
+import {connect} from 'react-redux';
+import { setAlert } from '../../actions/alert';
 
-const Register = () => {
+const Register = (props) => {
 const [formData, setFormData]=useState({
     name:'',
     email:'',
@@ -16,7 +18,7 @@ const onChange=(e)=>{
 const onSubmit= async e=>{
     e.preventDefault();
     if(password !== password2){
-        return console.log('password do not match!');
+        return props.setAlert('password do not match!','danger');
     }
     // console.log(formData);
     const newUser={name, email, password, password2};
@@ -28,7 +30,7 @@ const onSubmit= async e=>{
                 'Content-Type':'application/json'
             }
         };
-        const res=await axios.post('/api/users/', body, config);
+        const res=await axios.post('api/users/', body, config);
         console.log(res.data);
 
     }catch(error){
@@ -41,10 +43,10 @@ const onSubmit= async e=>{
             <p className="lead"><i className="fas fa-user"></i> Create Your Account</p>
             <form className="form" onSubmit={e=>onSubmit(e) }>
                 <div className="form-group">
-                    <input type="text" placeholder="Name" required name="name" value={name} onChange={e => onChange(e) }/>
+                    <input type="text" placeholder="Name"  name="name" value={name} onChange={e => onChange(e) }/>
                 </div>
                 <div className="form-group">
-                    <input type="email" placeholder="Email Address" required name="email" value={email} onChange={e => onChange(e) } />
+                    <input type="email" placeholder="Email Address"  name="email" value={email} onChange={e => onChange(e) } />
                     <small className="form-text">This site uses Gravatar so if you want a profile image, use a Gravatar email</small>
                 </div>
                 <div className="form-group">
@@ -62,4 +64,5 @@ const onSubmit= async e=>{
         </Fragment> 
     )
 }
-export default Register;
+////{setAlert} --> allow us to access props.setAlert
+export default connect(null, {setAlert})(Register);
