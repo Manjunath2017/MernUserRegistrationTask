@@ -1,10 +1,15 @@
 import React, { Fragment, useState } from 'react';
 import {Link} from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
 import {connect} from 'react-redux';
 import { setAlert } from '../../actions/alert';
+import { register } from '../../actions/auth';
+import {PropTypes} from 'prop-types';
+
 
 const Register = (props) => {
+    // console.log('setAlert line 11 Register.js',setAlert);
+    // console.log('register line 12 Register.js',register);
 const [formData, setFormData]=useState({
     name:'',
     email:'',
@@ -20,22 +25,25 @@ const onSubmit= async e=>{
     if(password !== password2){
         return props.setAlert('password do not match!','danger');
     }
-    // console.log(formData);
-    const newUser={name, email, password, password2};
-    // console.log(newUser);
-    const body={...newUser};
-    try{
-        const config={
-            headers:{
-                'Content-Type':'application/json'
-            }
-        };
-        const res=await axios.post('api/users/', body, config);
-        console.log(res.data);
+    props.register({name, email, password});
 
-    }catch(error){
-        console.error(error.response.data.errors);
-    }
+    ////..............the following code works, its without using redux.....
+    // console.log(formData);
+    // const newUser={name, email, password, password2};
+    // // console.log(newUser);
+    // const body={...newUser};
+    // try{
+    //     const config={
+    //         headers:{
+    //             'Content-Type':'application/json'
+    //         }
+    //     };
+    //     const res=await axios.post('api/users/', body, config);
+    //     console.log(res.data);
+
+    // }catch(error){
+    //     console.error(error.response.data.errors);
+    // }
 }
     return (
         <Fragment>
@@ -60,9 +68,13 @@ const onSubmit= async e=>{
             <p className="my-1">
                 Already have an account? <Link to="login">Sign In</Link>
             </p>
-
         </Fragment> 
     )
 }
+Register.propTypes={
+    setAlert:PropTypes.func.isRequired,
+    register:PropTypes.func.isRequired
+};
+
 ////{setAlert} --> allow us to access props.setAlert
-export default connect(null, {setAlert})(Register);
+export default connect(null, {setAlert, register})(Register);

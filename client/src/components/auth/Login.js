@@ -42,7 +42,7 @@ const onSubmit= async e=>{
                 <div className="form-group">
                     <input type="password" placeholder="Password" name="password" minLength="6"  value={password} onChange={e => onChange(e) }/>
                 </div>
-                <input type="submit" className="btn btn-primary" value="Register" />
+                <input type="submit" className="btn btn-primary" value="Login" />
             </form>
             <p className="my-1">
                 Don't have an account? <Link to="login">Sign In</Link>
