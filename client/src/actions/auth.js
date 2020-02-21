@@ -7,12 +7,35 @@ import{
     AUTH_ERROR
 } from './types';
 import {setAlert} from './alert';
+import SetAuthToken from '../utils/SetAuthToken';
+
+//// Load User -> called FN from /App.js-->router
+export const loadUser=()=> async dispatch=>{
+    console.log(localStorage.token, 'localstorage token auth actions/.js line 14')
+    if(localStorage.token){
+        SetAuthToken(localStorage.token);
+    }
+    try{
+        const result=await axios.get('/api/auth');
+        console.log(result, 'result action/auth.js')
+        dispatch({
+            type:USER_LOADED,
+            payload:result.data
+        });
+    }catch(err){
+        console.log('result fail line 26 action/auth.js',err);
+        dispatch({
+            type:AUTH_ERROR
+        });
+    }
+}
+
 
 //// Register user
 export const register=({name, email, password})=> async dispatch=>{
     const config={
         headers:{
-            'Content-type':'application/json'
+            'Content-Type':'application/json'
         }
     };
     const body=JSON.stringify({name, email, password});

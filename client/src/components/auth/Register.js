@@ -7,7 +7,7 @@ import { register } from '../../actions/auth';
 import {PropTypes} from 'prop-types';
 
 
-const Register = (props) => {
+const Register = ({setAlert, register}) => {
     // console.log('setAlert line 11 Register.js',setAlert);
     // console.log('register line 12 Register.js',register);
 const [formData, setFormData]=useState({
@@ -23,9 +23,9 @@ const onChange=(e)=>{
 const onSubmit= async e=>{
     e.preventDefault();
     if(password !== password2){
-        return props.setAlert('password do not match!','danger');
+        return setAlert('password do not match!','danger');
     }
-    props.register({name, email, password});
+    register({name, email, password});
 
     ////..............the following code works, its without using redux.....
     // console.log(formData);
