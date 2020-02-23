@@ -1,8 +1,13 @@
 import React, { Fragment, useState } from 'react';
-import {Link} from 'react-router-dom';
-import axios from 'axios';
+import {Link, Redirect} from 'react-router-dom';
+// import axios from 'axios';
 
-const Login = () => {
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {login} from '../../actions/auth';
+
+const Login = ({login, isAuthenticated}) => {
+
 const [formData, setFormData]=useState({
     email:'',
     password:''
@@ -13,22 +18,29 @@ const onChange=(e)=>{
 }
 const onSubmit= async e=>{
     e.preventDefault();
+    //// Normal API call (it works)
     // console.log(formData);
-    const newUser={email, password};
-    // console.log(newUser);
-    const body={...newUser};
-    try{
-        const config={
-            headers:{
-                'Content-Type':'application/json'
-            }
-        };
-        const res=await axios.post('api/auth/', body, config);
-        console.log(res.data);
+    // const newUser={email, password};
+    // // console.log(newUser);
+    // const body={...newUser};
+    // try{
+    //     const config={
+    //         headers:{
+    //             'Content-Type':'application/json'
+    //         }
+    //     };
+    //     const res=await axios.post('api/auth/', body, config);
+    //     console.log(res.data);
 
-    }catch(error){
-        console.error(error.response.data.errors);
-    }
+    // }catch(error){
+    //     console.error(error.response.data.errors);
+    // }
+    login(email, password);
+}
+
+//// Redirect if logged in
+if(isAuthenticated){
+    return <Redirect to="/dashboard" />
 }
     return (
         <Fragment>
@@ -50,4 +62,16 @@ const onSubmit= async e=>{
         </Fragment> 
     )
 }
-export default Login;
+
+//// Login is a props, so use login as props
+Login.propTypes={
+    login:PropTypes.func.isRequired
+}
+
+const mapStateToProps=state=>({
+    isAuthenticated:state.auth.isAuthenticated //// from reducer/auth.js -> initialState.isAuthenticated
+});
+
+console.log(mapStateToProps);
+
+export default connect(mapStateToProps, {login})(Login);

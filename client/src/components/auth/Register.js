@@ -1,13 +1,12 @@
 import React, { Fragment, useState } from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 // import axios from 'axios';
 import {connect} from 'react-redux';
 import { setAlert } from '../../actions/alert';
 import { register } from '../../actions/auth';
 import {PropTypes} from 'prop-types';
 
-
-const Register = ({setAlert, register}) => {
+const Register = ({setAlert, register, isAuthenticated}) => {
     // console.log('setAlert line 11 Register.js',setAlert);
     // console.log('register line 12 Register.js',register);
 const [formData, setFormData]=useState({
@@ -18,7 +17,7 @@ const [formData, setFormData]=useState({
 });
 const {name, email, password, password2}=formData;
 const onChange=(e)=>{
-    setFormData({...formData, [e.target.name]:e.target.value})
+    setFormData({...formData, [e.target.name]:e.target.value});
 }
 const onSubmit= async e=>{
     e.preventDefault();
@@ -44,6 +43,9 @@ const onSubmit= async e=>{
     // }catch(error){
     //     console.error(error.response.data.errors);
     // }
+}
+if(isAuthenticated){
+    return <Redirect to="/dashboard" />
 }
     return (
         <Fragment>
@@ -73,8 +75,14 @@ const onSubmit= async e=>{
 }
 Register.propTypes={
     setAlert:PropTypes.func.isRequired,
-    register:PropTypes.func.isRequired
+    register:PropTypes.func.isRequired,
+    isAuthenticated:PropTypes.bool
 };
 
+const mapStateToProps=state=>({
+    isAuthenticated:state.auth.isAuthenticated
+});
+
 ////{setAlert} --> allow us to access props.setAlert
-export default connect(null, {setAlert, register})(Register);
+
+export default connect(mapStateToProps, {setAlert, register})(Register);

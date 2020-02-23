@@ -13,14 +13,14 @@ import {Provider} from 'react-redux';
 import store from './store';
 import SetAuthToken from './utils/SetAuthToken'; 
 
-if(localStorage.token){
-  console.log('localStorage.token line 17 app.js');
-  SetAuthToken(localStorage.token);
+console.log('localStorage.token line 17 app.js', localStorage.token);
+if(localStorage.token){  //// it 'll chceck if token is available
+  SetAuthToken(localStorage.token); //if true, call n set token 
 }
 const App=()=>{
-  useEffect(()=>{
-    console.log('useEffect line 21 app.js');
-    store.dispatch(loadUser());
+  useEffect(()=>{  //// check form loc
+    console.log('useEffect line 21 app.js store', store);
+    store.dispatch(loadUser()); 
   },[]);
  
   return(
@@ -40,5 +40,4 @@ const App=()=>{
   </Router>
   </Provider>
 )};
-
 export default App;
