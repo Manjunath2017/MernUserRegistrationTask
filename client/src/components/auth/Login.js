@@ -40,6 +40,7 @@ const onSubmit= async e=>{
 
 //// Redirect if logged in
 if(isAuthenticated){
+    console.log('isAuthenticated',isAuthenticated);
     return <Redirect to="/dashboard" />
 }
     return (

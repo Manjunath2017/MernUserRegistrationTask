@@ -45,6 +45,7 @@ const onSubmit= async e=>{
     // }
 }
 if(isAuthenticated){
+    console.log('isAuthenticated',isAuthenticated);
     return <Redirect to="/dashboard" />
 }
     return (
