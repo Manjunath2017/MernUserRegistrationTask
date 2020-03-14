@@ -14,13 +14,15 @@ import SetAuthToken from '../utils/SetAuthToken';
 
 //// Load User -> called FN from /App.js-->router
 export const loadUser=()=> async dispatch=>{
+    
     console.log(localStorage.token, 'localstorage token auth actions/.js line 14')
     if(localStorage.token){
-        SetAuthToken(localStorage.token);
+        SetAuthToken(localStorage.token); //// token is set into header
     }
     try{
-        const result=await axios.get('/api/auth');
+        const result=await axios.get('/api/auth'); //// token is set into header, you are loggedIn and in backend middleWare will verify the token, if verifiy get token!
         console.log(result, 'result action/auth.js');
+        
         dispatch({ //// call dispatcher an pass data, /type.js 'll set token
             type:USER_LOADED,
             payload:result.data
@@ -81,7 +83,7 @@ export const login=(email, password)=> async dispatch=>{
     }catch(err){
         const errors=err.response.data.errors;
         if(errors){
-            errors.forEach(error=> dispatch(setAlert(error.msg, 'danger')));
+            errors.forEach(error=> dispatch(setAlert(error.msg, 'danger'))); //// Vlaidation is done from backend!
         }
         dispatch({
             type:LOGIN_FAIL

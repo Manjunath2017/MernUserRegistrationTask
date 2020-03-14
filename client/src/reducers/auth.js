@@ -1,7 +1,15 @@
-import { REGISTER_SUCCESS, REGISTER_FAIL, USER_LOADED, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT } from '../actions/types';
+//// 3rd
+import { REGISTER_SUCCESS, 
+    REGISTER_FAIL, 
+    USER_LOADED, 
+    AUTH_ERROR, 
+    LOGIN_SUCCESS, 
+    LOGIN_FAIL, 
+    LOGOUT 
+} from '../actions/types';
 
 const initialState = {
-    token: localStorage.getItem('token'),
+    token: localStorage.getItem('token'), //// look for an item called token
     isAuthenticated: null,
     loading: true,
     user: null

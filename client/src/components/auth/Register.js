@@ -1,3 +1,5 @@
+////6th call to setAlert();
+
 import React, { Fragment, useState } from 'react';
 import {Link, Redirect} from 'react-router-dom';
 // import axios from 'axios';
@@ -22,7 +24,7 @@ const onChange=(e)=>{
 const onSubmit= async e=>{
     e.preventDefault();
     if(password !== password2){
-        return setAlert('password do not match!','danger');
+        return setAlert('password do not match!','danger'); //// call SetAlert -->'../../actions/alert'
     }
     register({name, email, password});
 

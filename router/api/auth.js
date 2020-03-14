@@ -7,9 +7,8 @@ const bcrypt=require('bcrypt');
 const jwt=require('jsonwebtoken');
 const config=require('config');
 
-
 ////.................get data using token........................
-//// localhost:5000/api/auth/ login
+//// localhost:5000/api/auth/ 
 router.get('/', auth, async(req,res)=>{ 
     try{
         // console.log(res.authUserData, 'auth.js line 7'); 

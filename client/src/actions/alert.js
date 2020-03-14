@@ -1,8 +1,10 @@
+//// 5th call the reducer
 import {SET_ALERT, REMOVE_ALERT} from './types';
 import uuid from 'uuid';
 
 ////setAlert receive (...state, payload)
-export const setAlert=(msg, alertType, timeout=3000)=>dispatch=>{
+export const setAlert=(msg, alertType, timeout=3000)=>dispatch=>{  
+    //// with the help of thunk middleware(package)we can create 'dispatch' middleware
     
     ////receive data from /register.js
 

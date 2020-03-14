@@ -1,3 +1,5 @@
+//// 3rd create reducer
+////Reducer it is going to take just 'state' and 'action'
 import {SET_ALERT, REMOVE_ALERT} from '../actions/types';
 
 const initialState=[];
