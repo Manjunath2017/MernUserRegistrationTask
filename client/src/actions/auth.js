@@ -15,7 +15,6 @@ import SetAuthToken from '../utils/SetAuthToken';
 
 //// Load User -> called FN from /App.js-->router
 export const loadUser=()=> async dispatch=>{
-    
     console.log(localStorage.token, 'localstorage token auth actions/.js line 14')
     if(localStorage.token){
         SetAuthToken(localStorage.token); //// token is set into header

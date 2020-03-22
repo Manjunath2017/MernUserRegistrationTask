@@ -5,7 +5,9 @@ import { connect} from 'react-redux';
 import { getCurrentProfile } from '../../actions/profile';
 import Spinner from '../layout/Spinner';
 
-const Dashboard= ({getCurrentProfile, auth:{user}, profile:{profile, loading}})=>{
+const Dashboard= ({getCurrentProfile, auth, profile:{profile, loading}})=>{
+console.log('auth', auth);
+const user=''
     useEffect(()=>{
         getCurrentProfile();
     },[getCurrentProfile]);
@@ -32,10 +34,8 @@ Dashboard.propTypes={
 };
 
 const mapStateToProps=state => ({
-
     auth:state.auth,
     profile:state.profile
-
 });
 
 export default connect(mapStateToProps, {getCurrentProfile})(Dashboard);

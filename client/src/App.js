@@ -9,11 +9,13 @@ import Register from './components/auth/Register';
 import {loadUser} from './actions/auth';
 import Dashboard from './components/Dashboard/dashboard';
 import PrivateRouting from './components/Routing/PrivateRouting';
+import CreateProfile from './components/profile-forms/CreateProfile';
 
 ////Redux
 import {Provider} from 'react-redux';
 import store from './store';
 import SetAuthToken from './utils/SetAuthToken'; 
+
 
 console.log('localStorage.token line 17 app.js', localStorage.token);
 if(localStorage.token){  //// it 'll chceck if token is available
@@ -36,7 +38,9 @@ const App=()=>{
       <Switch>
         <Route exact path='/login' component={Login} />    
         <Route exact path='/register' component={Register} />    
-        <PrivateRouting exact path='/dashboard' component={Dashboard} />    
+        <PrivateRouting exact path='/dashboard' component={Dashboard} />
+        <PrivateRouting exact path='/create-profile' component={CreateProfile} />    
+
       </Switch>
     </section>
   </Fragment>
