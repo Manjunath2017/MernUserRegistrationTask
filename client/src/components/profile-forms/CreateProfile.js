@@ -1,5 +1,5 @@
 import React, { useState, Fragment } from 'react';
-import {link, withRouter} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {createProfileFn} from '../../actions/profile';
@@ -36,10 +36,11 @@ const CreateProfile = ({createProfileFn, history}) => {
     instagram
   } = formData;
 
+  
   const onChange = e => setFormData(
     { ...formData, [e.target.name]: e.target.value }
-
   );
+
   console.log(formData);
    const submitFormData = e =>{
     e.preventDefault();
