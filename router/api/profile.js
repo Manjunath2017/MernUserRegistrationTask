@@ -3,9 +3,6 @@ const router=express.Router();
 const mongoose=require('mongoose');
 const request=require('request');
 const config=require('config');
-
-
-
 const ProfileModel=require('../../models/profile');
 const userModel=require('../../models/users');
 const auth=require('../../middleware/auth');
@@ -47,7 +44,7 @@ router.post('/',[auth, [
     // console.log()
 
     //// Add userId in profile
-    profileFields.user=res.authUserData.id;
+    profileFields.user=res.authUserData.id; 
     console.log(res.authUserData.id);
     if(company) profileFields.company=company;
     if(website) profileFields.website=website;

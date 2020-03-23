@@ -5,9 +5,7 @@ const initialState={
     profiles:[],
     repos:[],
     loading:true,
-    error:{
-
-    }
+    error:{}
 }
 
 export default (state=initialState, action)=>{

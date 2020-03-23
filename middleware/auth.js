@@ -17,7 +17,7 @@ module.exports=(req, res, next)=>{
 
         res.authUserData=decoded.userData; ////use this value is next function
         //res.user=decoded.userData
-        console.log(res.authUserData);
+        console.log(res.authUserData, 'middleWare!');
         next();
 
     }catch(error){
