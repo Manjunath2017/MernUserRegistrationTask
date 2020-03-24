@@ -37,7 +37,7 @@ router.post('/',[auth, [
         return res.status(400).json({error:errors.array() });
     }
     console.log(req.body);
-    const {company, website, location, bio, status, githubusersname, skills, youtube, facebook, twitter, instagram, linkedin}=req.body;
+    const {company, website, location, bio, status, githubusername, skills, youtube, facebook, twitter, instagram, linkedin}=req.body;
 
     ////Build profile object
     const profileFields={};
@@ -51,7 +51,7 @@ router.post('/',[auth, [
     if(location) profileFields.location=location;
     if(bio) profileFields.bio=bio;
     if(status) profileFields.status=status;
-    if(githubusersname) profileFields.githubusersname=githubusersname;
+    if(githubusername) profileFields.githubusername=githubusername;
 
     if(skills){
         profileFields.skills=skills.split(',').map(data=> data.trim());
