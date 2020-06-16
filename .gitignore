@@ -1,1 +1,14 @@
 node_modules/
+
+...........Note.......
+npm run dev
+
+1)without data
+	"email":"w@mjj.com",
+	"password":"1234567"
+2) admin@admin.com  
+    admin12	
+3) admin@mj.com
+	  admin12		
+4) mj@mj.com 1234567    
+5) mj1@mj.com 1234567    

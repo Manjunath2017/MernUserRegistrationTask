@@ -27,6 +27,10 @@ router.post('/',[
     check('email', 'Please include a valid email').isEmail(),
     check('password', 'Password is required!').exists()
 ], async(req,res)=>{ 
+    
+    // const testDecode= await bcrypt.decode('$2b$10$A6f9ZoYspO1hG./Hmyi0SOMh.6losl0JBCM0E4SFIPOl4.aV5FpBi');
+    // console.log('text auth.js 32 line');
+
     // console.log(req.body);
     const errors=validationResult(req);
     if(!errors.isEmpty()){
@@ -41,6 +45,7 @@ router.post('/',[
            return res.status(400).json({errors:[{msg:'Invalid credentials!'}]})
         }
 
+
         const isMatch=await bcrypt.compare(password, user.password);
         if(!isMatch){
             return res.status(400).json({errors:[{msg:'Invalid credentials!'}]})
@@ -48,7 +53,7 @@ router.post('/',[
    
         ////Return jsonWebToken
         const payLoad={
-            userData:{
+            userData:{ //1st.. 2nd in middleWare/auth.js -> assignes data
                 id:user.id,
                 name:user.name
             }

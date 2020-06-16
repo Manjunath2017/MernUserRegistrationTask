@@ -8,12 +8,14 @@ const config=require('config');
 
 const UserModel = require('../../models/users');
 
+//Register user
+// localhost:5000/api/users
 router.post('/',[
     check('name', 'Name is required!').not().isEmpty(), //// They must not() be equal
     check('email', 'Please include a valid email').isEmail(),
     check('password', 'Please enter a Password with 6 or more characters').isLength({min:6})
 ], async(req,res)=>{ 
-    // console.log(req.body);
+    console.log(req.body);
     const errors=validationResult(req);
     if(!errors.isEmpty()){
         return res.status(400).json({errors:errors.array()});
@@ -21,10 +23,10 @@ router.post('/',[
     const {name, email, password}=req.body
 
     try{
-        //// see if user exists
+        //// check if user exist
         let user=await UserModel.findOne({email});
         if(user){
-           return res.status(400).json({errors:[{msg:'User already exists!'}]})
+           return res.status(400).json({errors:[{msg:'User already exist!'}]})
         }
 
         //// Get users gravatar

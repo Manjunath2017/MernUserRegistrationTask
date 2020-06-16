@@ -12,12 +12,14 @@ module.exports=(req, res, next)=>{
     try{
         // const conf=config.get('jwtSecret');
         // console.log(token, 'token', 'middleware line 11', conf);
+   
+
         const decoded=jwt.verify(token, config.get('jwtSecret'));
         // console.log(decoded, 'decoded', 'middleware line 13');
 
         res.authUserData=decoded.userData; ////use this value is next function
         //res.user=decoded.userData
-        console.log(res.authUserData, 'middleWare!');
+        // console.log(res.authUserData, 'middleWare!');
         next();
 
     }catch(error){
