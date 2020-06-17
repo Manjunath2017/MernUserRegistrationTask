@@ -85,3 +85,33 @@ export const addExperience=( formData, history)=> async dispatch=>{
 }
 
 
+//Add Education
+export const addEducation=( formData, history)=> async dispatch=>{
+    try{
+        const config={
+            header:{
+                'Content-Type':'application/json'
+            }
+        };
+        const res=await axios.put('/api/profile/school', formData, config);
+
+        dispatch({
+            type:UPDATE_PROFILE,
+            payload:res.data
+        });
+
+        dispatch(setAlert('Education Added', 'success') );
+        history.push('/dashboard');
+    }catch(err){
+        const errors=err.response.data.errors; //
+        console.log(errors)
+        if(errors){
+            errors.forEach(error=> dispatch(setAlert(error.msg, 'danger'))); //// Vlaidation is done from backend!
+        }
+
+        dispatch({
+            type:PROFILE_ERROR,
+            payload:{msg:err.response.statusText, status:err.response.status}
+        })
+     }
+}

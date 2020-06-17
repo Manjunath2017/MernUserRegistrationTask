@@ -1,0 +1,15 @@
+dataBase: https://cloud.mongodb.com/v2/5dfcbddccf09a215431affcf#metrics/replicaSet/5ecd740079dc6c13665c3c44/explorer/mernstack/profiles
+ID: manjunath.jadhav1231@
+
+...........Note.......
+npm run dev
+
+1)without data
+	"email":"w@mjj.com",
+	"password":"1234567"
+2) admin@admin.com  
+    admin12	
+3) admin@mj.com
+	  admin12		
+4) mj@mj.com  1234567    ==> withData
+5) mj1@mj.com 1234567    
