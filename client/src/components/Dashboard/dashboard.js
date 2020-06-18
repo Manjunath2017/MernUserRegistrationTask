@@ -5,15 +5,21 @@ import { connect} from 'react-redux';
 import { getCurrentProfile } from '../../actions/profile';
 import Spinner from '../layout/Spinner';
 import DashboardAction from './DashboardAction';
+import Experience from './Experience';
+
 
 const Dashboard= ({getCurrentProfile, auth, profile:{profile, loading}})=>{
-console.log('auth', auth);
-const user=''
-    useEffect(()=>{
-        getCurrentProfile();
-    },[getCurrentProfile]);
 
-    return loading && profile === null ? <Spinner />:
+console.log('auth', auth);
+
+const user='';
+
+useEffect(()=>{
+    getCurrentProfile();
+    console.log(profile, '\n\n', profile.experience);
+},[getCurrentProfile]);
+
+return loading && profile === null ? <Spinner />:
     <Fragment>
         <h1 className="large text-primary"> Dashboard </h1>
         <p className="lead">
@@ -22,7 +28,8 @@ const user=''
         {profile !== null ? ( 
         <Fragment> 
             <DashboardAction />
-        </Fragment> 
+            <Experience experience={profile.experience} />
+        </Fragment>
         ) : ( 
         <Fragment> 
             <p> You have not yet setup a profile, please add some info</p>
