@@ -4,12 +4,15 @@ import Moment from 'react-moment';
 import { connect } from 'react-redux';
 
 const Experience = ({ experience }) => {
+  console.log(experience);
+
   const experiences = experience.map(exp =>(
-    <td key={exp._id}>
+    <tr key={exp._id}>
       <td>{exp.company}</td>
       <td className="hide-sm">{exp.title}</td>
-      <td>
+      <td>  
         <Moment format="YYYY/MM/DD">{exp.from}</Moment>
+        -{ }
         {exp.to === null ?(
           "Now"
         ):(
@@ -19,7 +22,7 @@ const Experience = ({ experience }) => {
       <td>
         <button className="btn btn-danger">Delete</button>
       </td>
-    </td>
+    </tr>
   ));
   return (
     <Fragment>
@@ -31,6 +34,7 @@ const Experience = ({ experience }) => {
             <th className="hide-sm">Title</th>
             <th className="hide-sm">Years</th>
           </tr>
+           {experiences} 
         </thead>
       </table>
     </Fragment>
@@ -40,5 +44,5 @@ const Experience = ({ experience }) => {
 Experience.propTypes = {
   experience:PropTypes.array.isRequired
 };
-
+ 
 export default Experience;

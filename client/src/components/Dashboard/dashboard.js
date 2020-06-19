@@ -10,15 +10,15 @@ import Experience from './Experience';
 
 const Dashboard= ({getCurrentProfile, auth, profile:{profile, loading}})=>{
 
-console.log('auth', auth);
+// console.log('auth', auth);
 
 const user='';
 
 useEffect(()=>{
     getCurrentProfile();
-    console.log(profile, '\n\n', profile.experience);
 },[getCurrentProfile]);
 
+// console.log(profile, '\n\n');
 return loading && profile === null ? <Spinner />:
     <Fragment>
         <h1 className="large text-primary"> Dashboard </h1>
