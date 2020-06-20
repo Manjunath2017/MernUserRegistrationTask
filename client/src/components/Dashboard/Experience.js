@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Moment from 'react-moment';
-import { connect } from 'react-redux';
 
 const Experience = ({ experience }) => {
   console.log(experience);
@@ -12,7 +11,7 @@ const Experience = ({ experience }) => {
       <td className="hide-sm">{exp.title}</td>
       <td>  
         <Moment format="YYYY/MM/DD">{exp.from}</Moment>
-        -{ }
+        -{ " "}
         {exp.to === null ?(
           "Now"
         ):(
@@ -24,6 +23,7 @@ const Experience = ({ experience }) => {
       </td>
     </tr>
   ));
+
   return (
     <Fragment>
       <h2 className="my-2"> Experience  </h2>
