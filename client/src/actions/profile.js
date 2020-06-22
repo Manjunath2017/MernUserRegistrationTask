@@ -2,7 +2,7 @@ import axios from 'axios';
 import {
     GET_PROFILE,
     PROFILE_ERROR,
-    UPDATE_PROFILE
+    UPDATE_PROFILE 
 }from './types';
 import {setAlert} from './alert';
 // Get current users profile
@@ -120,9 +120,20 @@ export const addEducation=( formData, history)=> async dispatch=>{
 export const deleteExperience = id => async dispatch =>{
     if(window.confirm('Are you sure? This cannot be undone!')){
         try {
-            console.log('deleteExperience!', id);
+            // console.log('deleteExperience!', id);
+            // var a={"name":"Manjunath"};
+            const res = await axios.delete(`/api/profile/experience/${id}`);
+            dispatch({
+                type:UPDATE_PROFILE,
+                payload:res.data
+            })
+            dispatch(setAlert('Experience Removed ', 'Success'));
         } catch (error) {
-            console.log('error DeleteExperience!');        
+            // console.log('error DeleteExperience!'); 
+            dispatch({
+                type:PROFILE_ERROR,
+                payload:{msg:error.response.statusText, status:error.response.status}
+            })       
         }
     }
 }
