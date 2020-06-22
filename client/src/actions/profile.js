@@ -115,3 +115,14 @@ export const addEducation=( formData, history)=> async dispatch=>{
         })
      }
 }
+
+//Delete Experience
+export const deleteExperience = id => async dispatch =>{
+    if(window.confirm('Are you sure? This cannot be undone!')){
+        try {
+            console.log('deleteExperience!', id);
+        } catch (error) {
+            console.log('error DeleteExperience!');        
+        }
+    }
+}
