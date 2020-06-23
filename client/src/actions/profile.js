@@ -5,7 +5,9 @@ import {
     UPDATE_PROFILE 
 }from './types';
 import {setAlert} from './alert';
+
 // Get current users profile
+// /api/profile/me
 export const getCurrentProfile=()=> async dispatch=>{
     try{
         const res=await axios.get('/api/profile/me');
@@ -23,6 +25,7 @@ export const getCurrentProfile=()=> async dispatch=>{
 }
 
 //Create or update  profile
+// /api/profile
 export const createProfileFn=(formData, history, edit=false) => async dispatch=>{
     try{
         const config={
@@ -54,6 +57,7 @@ export const createProfileFn=(formData, history, edit=false) => async dispatch=>
 }
 
 //Add Experience
+// /api/profile/experience
 export const addExperience=( formData, history)=> async dispatch=>{
     try{
         const config={
@@ -86,6 +90,7 @@ export const addExperience=( formData, history)=> async dispatch=>{
 
 
 //Add Education
+// /api/profile/school
 export const addEducation=( formData, history)=> async dispatch=>{
     try{
         const config={
@@ -117,6 +122,7 @@ export const addEducation=( formData, history)=> async dispatch=>{
 }
 
 //Delete Experience
+// /api/profile/experience/${id}
 export const deleteExperience = id => async dispatch =>{
     if(window.confirm('Are you sure? This cannot be undone!')){
         try {
@@ -127,13 +133,25 @@ export const deleteExperience = id => async dispatch =>{
                 type:UPDATE_PROFILE,
                 payload:res.data
             })
-            dispatch(setAlert('Experience Removed ', 'Success'));
+            dispatch(setAlert('Experience Removed ', 'success'));
         } catch (error) {
             // console.log('error DeleteExperience!'); 
             dispatch({
                 type:PROFILE_ERROR,
                 payload:{msg:error.response.statusText, status:error.response.status}
             })       
+        }
+    }
+}
+
+// Delete account
+export const deleteAccount = id => async dispatch =>{
+    if(window.confirm('Are you sure? This cannot be undone! ')){
+        try {
+            const res = await axios.delete(`/api/profile/`);
+            console.log('res \n \n ', res);
+        } catch (error) {
+            console.log('error, delete account!');
         }
     }
 }
