@@ -12,8 +12,8 @@ const Education = ({ education, deleteAccount }) => {
       <td>{edu.school}</td>
       <td className="hide-sm">{edu.degree}</td>
       <td>  
-        <Moment format="YYYY/MM/DD">{edu.from}</Moment>
-        -{" " }
+        <Moment format="YYYY/MM/DD">{edu.from} </Moment>
+        {" " }-{" " }
         {edu.to === null ?(
           "Now"
         ):(
@@ -25,7 +25,7 @@ const Education = ({ education, deleteAccount }) => {
       </td>
     </tr>
   ));
-  
+
   return (
     <Fragment>
       <h2 className="my-2"> Education  </h2>
