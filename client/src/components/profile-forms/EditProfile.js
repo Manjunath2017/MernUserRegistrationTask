@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {createProfileFn, getCurrentProfile} from '../../actions/profile';
 
-// check need to add auth?
-const EditProfile = ({profile:{profile, loading},createProfileFn, getCurrentProfile, history}) => {
+// check, need to add auth?
+const EditProfile = ({profile:{profile, loading}, auth, createProfileFn, getCurrentProfile, history}) => {
+  console.log('profile', profile, loading);
   const [formData, setFormData] = useState({
     company: '',
     website: '',
@@ -24,7 +25,7 @@ const EditProfile = ({profile:{profile, loading},createProfileFn, getCurrentProf
    
   useEffect(()=>{
     getCurrentProfile();
-    console.log('profile',profile, 'loading', loading ,'\n' );
+    // console.log('profile',profile, 'loading', loading ,'\n' );
     setFormData({
       company: loading || !profile.company?'':profile.company,
       website: loading || !profile.website?'':profile.website,
@@ -61,7 +62,7 @@ const EditProfile = ({profile:{profile, loading},createProfileFn, getCurrentProf
     { ...formData, [e.target.name]: e.target.value }
   );
 
-  console.log('profile', profile, 'loading', loading);
+  // console.log('profile', profile, 'loading', loading);
    const submitFormData = e =>{
     e.preventDefault();
     createProfileFn(formData, history, true);
@@ -163,6 +164,7 @@ EditProfile.propsTypes = {
 }
 
 const mapStateToProps=state=>({
+  auth:state.auth,
   profile:state.profile
 });
 

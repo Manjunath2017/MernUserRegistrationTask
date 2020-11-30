@@ -7,9 +7,10 @@ npm run dev
 1)without data
 	"email":"w@mjj.com",
 	"password":"1234567"
-2) admin@admin.com  
-    admin12	
-3) admin@mj.com
-	  admin12		
-4) mj@mj.com  1234567    ==> withData
-5) mj1@mj.com 1234567    
+	
+ n@mj.com   ---> 1234567
+ admin@admin.com  ---> admin12	
+    
+ admin@mj.com   ---> admin12	
+	  	
+ mj1@mj.com 1234567    

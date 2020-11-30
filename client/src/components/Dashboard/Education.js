@@ -5,14 +5,14 @@ import { connect } from 'react-redux';
 import { deleteAccount } from '../../actions/profile';
 
 const Education = ({ education, deleteAccount }) => {
-  console.log(education);
+  console.log('education Education.JS', education);
 
   const educations = education.map(edu =>(
     <tr key={edu._id}>
       <td>{edu.school}</td>
       <td className="hide-sm">{edu.degree}</td>
       <td>  
-        <Moment format="YYYY/MM/DD">{edu.from} </Moment>
+        <Moment format="YYYY/MM/DD">{edu.from}</Moment>
         {" " }-{" " }
         {edu.to === null ?(
           "Now"
