@@ -58,7 +58,7 @@ const AddEducation = ({addEducation, history }) => {
           {
             //  toggleDisabled(!toDateDisabled);===> reset to true/false}
           }
-          <p><input type="checkbox" name="current" checked={current} onChange={e => { setFormData({ ...formData, current: !current }); toggleDisabled(!toDateDisabled); }} value={current} /> Current Job</p>
+          <p><input type="checkbox" name="current" checked={current} onChange={e => { setFormData({ ...formData, current: !current }); toggleDisabled(!toDateDisabled); }} value={current} /> Current School</p>
           </div>
           <div className="form-group">
             <h4>To Date</h4> {/* disabled={toDateDisabled ? 'disabled' : ''} ===> if current JOB is true then disable 'exit date' */}

@@ -10,7 +10,7 @@ const {check, validationResult}=require('express-validator');
 
 //// @route GET --> localhost:5000/api/profile/me/
 router.get('/me', auth, async (req,res)=>{ 
-    console.log(res.authUserData)
+    // console.log(res.authUserData)
     // res.send('Profile Module!')
     try{
     const profile = await ProfileModel.findOne({ user: res.authUserData.id })
@@ -36,7 +36,7 @@ router.post('/',[auth, [
     if(!errors.isEmpty()){
         return res.status(400).json({error:errors.array() });
     }
-    console.log(req.body);
+    // console.log(req.body);
     const {company, website, location, bio, status, githubusername, skills, youtube, facebook, twitter, instagram, linkedin}=req.body;
 
     ////Build profile object
@@ -45,7 +45,7 @@ router.post('/',[auth, [
 
     //// Add userId in profile
     profileFields.user=res.authUserData.id; 
-    console.log(res.authUserData.id);
+    // console.log(res.authUserData.id);
     if(company) profileFields.company=company;
     if(website) profileFields.website=website;
     if(location) profileFields.location=location;
@@ -56,7 +56,7 @@ router.post('/',[auth, [
     if(skills){
         profileFields.skills=skills.split(',').map(data=> data.trim());
     }
-    console.log(profileFields.skills);
+    // console.log(profileFields.skills);
     //// Build social object
     profileFields.social={}
     if(youtube) profileFields.social.youtube=youtube;
@@ -66,21 +66,21 @@ router.post('/',[auth, [
     if(instagram) profileFields.social.instagram=instagram;
 
     try{
-        console.log(res.authUserData.id);
+        // console.log(res.authUserData.id);
         let profile=await ProfileModel.findOne({user:res.authUserData.id});
-console.log(profile, 'line 70');
+// console.log(profile, 'line 70');
         if(profile){
             //// Update profile
             profile=await ProfileModel.findOneAndUpdate({user:res.authUserData.id}, {$set:profileFields}, {new: true})
             
-            console.log(profile, 'line 75 update profile');
+            // console.log(profile, 'line 75 update profile');
             return res.json(profile);
         }
 
         //// Create
         profile=new ProfileModel(profileFields);
         await profile.save();
-        console.log(profile, 'save to collection line 82')
+        // console.log(profile, 'save to collection line 82');
         res.json(profile);
 
     }catch(error){
@@ -131,7 +131,7 @@ router.get('/user/:user_id', async(req,res)=>{
 //// Delete user and profile 
 router.delete('/', auth, async(req,res)=>{
     try{
-        console.log(res,'response!')
+        // console.log(res,'response!');
         //// Remove profile  
         let deleteProfile=await ProfileModel.findOneAndRemove({user:res.authUserData.id});
         //// Remove user
@@ -166,7 +166,7 @@ router.put('/experience',[auth,[
         profile.experience.unshift(newExp); //unshift is like push() but it'll insert at beginning.
         
         const result=await profile.save();
-        console.log(result);
+        // console.log(result);
         res.json(result);
 
     }catch(error){
@@ -215,13 +215,13 @@ if(!errors.isEmpty()){
 const{school, degree, fieldofstudy, from, to, current, description}=req.body;
 const newExp={school, degree, fieldofstudy, from, to, current, description};
 
-console.log(newExp);
+// console.log(newExp);
 try{
     const profile=await ProfileModel.findOne({user:res.authUserData.id});
     profile.education.unshift(newExp); //unshift is like push() but it'll insert at beginning.
     
     const result=await profile.save();
-    console.log(result);
+    // console.log(result);
     res.json(result);
 
 }catch(error){

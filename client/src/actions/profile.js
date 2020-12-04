@@ -4,7 +4,7 @@ import {
     PROFILE_ERROR,
     UPDATE_PROFILE, 
     CLEAR_PROFILE,
-    DELETE_ACCOUNT
+    ACCOUNT_DELETE
 }from './types';
 import {setAlert} from './alert';
 
@@ -129,7 +129,6 @@ export const deleteExperience = id => async dispatch =>{
     if(window.confirm('Are you sure? This cannot be undone!')){
         try {
             // console.log('deleteExperience!', id);
-            // var a={"name":"Manjunath"};
             const res = await axios.delete(`/api/profile/experience/${id}`);
             dispatch({
                 type:UPDATE_PROFILE,
@@ -145,17 +144,43 @@ export const deleteExperience = id => async dispatch =>{
         }
     }
 }
+//Delete Education
+// /api/profile/education/${id}
+export const deleteEducation = id => async dispatch =>{
+    if(window.confirm('Are you sure? This cannot be undone!')){
+        try {
+            // console.log('deleteExperience!', id);
 
-// Delete account
+            // const res = await axios.delete(`/api/education/school/${id}`);
+            const res = await axios.delete(`/api/profile/school/${id}`);
+            
+            console.log('res', res, '\n res data',res.data);
+            dispatch({
+                type:UPDATE_PROFILE,
+                payload:res.data
+            })
+            dispatch(setAlert('Education Removed ', 'success'));
+        } catch (error) {
+            // console.log('error DeleteEducation!'); 
+            dispatch({
+                type:PROFILE_ERROR,
+                payload:{msg:error.response.statusText, status:error.response.status}
+            })       
+        }
+    }
+}
+
+// Delete account and profile
 export const deleteAccount = () => async dispatch =>{
     if(window.confirm('Are you sure? This cannot be undone! ')){
         try {
-            const res = await axios.delete(`/api/profile/`);
-            console.log('res \n \n ', res);
+            const res = await axios.delete(`/api/profile/`); //Taking ID from token in backend!
+            // console.log('res \n \n ', res);
             dispatch({type:CLEAR_PROFILE});
-            dispatch({type:DELETE_ACCOUNT});
+            dispatch({type:ACCOUNT_DELETE});
 
-            dispatch(setAlert('Your account has been deleted permanantly!'))
+            dispatch(setAlert('Your account has been permanantly deleted!'));
+            //redirect automitacilly to index page from router
         } catch (error) {
             // console.log('error, delete account!');
             dispatch({

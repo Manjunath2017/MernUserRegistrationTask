@@ -2,7 +2,7 @@ import { GET_PROFILE,
     PROFILE_ERROR, 
     CLEAR_PROFILE, 
     UPDATE_PROFILE, 
-    DELETE_ACCOUNT } from "../actions/types";
+    ACCOUNT_DELETE } from "../actions/types";
 
 const initialState={
     profile:null,
@@ -16,7 +16,7 @@ export default (state=initialState, action)=>{
     const {type, payload}=action;
 
     switch(type){
-        case DELETE_ACCOUNT:
+        case ACCOUNT_DELETE:
             console.log('state: ', state, 'payload:', payload);
         return{
             ...state
