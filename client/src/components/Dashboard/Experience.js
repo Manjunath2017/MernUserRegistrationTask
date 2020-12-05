@@ -27,18 +27,25 @@ const Experience = ({ experience, deleteExperience }) => {
   ));
 
   return (
+    
     <Fragment>
-      <h2 className="my-2"> Experience  </h2>
-      <table className="table">
-        <thead>
-          <tr>
-            <th> Company </th>
-            <th className="hide-sm">Title</th>
-            <th className="hide-sm">Years</th>
-          </tr>
-           {experiences} 
-        </thead>
-      </table>
+      {
+        experiences.length>0?(
+          <div>
+             <h2 className="my-2"> Experience  </h2>
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th> Company </th>
+                    <th className="hide-sm">Title</th>
+                    <th className="hide-sm">Years</th>
+                  </tr>
+                  {experiences} 
+                </thead>
+              </table>
+          </div>
+        ):''
+      }
     </Fragment>
   );
 };

@@ -25,20 +25,29 @@ const Education = ({ education, deleteEducation }) => {
       </td>
     </tr>
   ));
+  console.log(educations, educations.length);
 
   return (
     <Fragment>
-      <h2 className="my-2"> Education  </h2>
-      <table className="table">
-        <thead>
-          <tr>
-            <th> School </th>
-            <th className="hide-sm">Degree</th>
-            <th className="hide-sm">Years</th>
-          </tr>
-           {educations} 
-        </thead>
-      </table>
+      {educations.length>0?
+          (
+          <div>
+          <h2 className="my-2"> Education  </h2>
+          <table className="table">
+            <thead>
+              <tr>
+                <th> School </th>
+                <th className="hide-sm">Degree</th>
+                <th className="hide-sm">Years</th>
+              </tr>
+               {educations} 
+            </thead>
+          </table>
+          </div>
+          ):
+          ''  
+      }
+
     </Fragment>
   );
 };
