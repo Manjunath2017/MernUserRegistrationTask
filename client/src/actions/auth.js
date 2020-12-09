@@ -20,8 +20,8 @@ export const loadUser=()=> async dispatch=>{
         SetAuthToken(localStorage.token); //// token is set into header
     }
     try{
-        const result=await axios.get('/api/auth'); //// token is set into header, you are loggedIn and in backend middleWare will verify the token, if verifiy get token!
-        console.log(result, 'result action/auth.js');
+        const result=await axios.get('/api/auth'); //// token is set into header, you are loggedIn and in backend middleWare will verify the token, if verifiy => get token!
+        // console.log(result, 'result action/auth.js');
         
         dispatch({ //// call dispatcher an pass data, /type.js 'll set token
             type:USER_LOADED,

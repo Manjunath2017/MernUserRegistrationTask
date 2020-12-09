@@ -40,7 +40,12 @@ export const createProfileFn=(formData, history, edit=false) => async dispatch=>
             type:GET_PROFILE,
             payload:res.data
         });
-        dispatch(setAlert(edit ? 'Profile Updated!' :'Profile Created!', 'success'))
+        dispatch(setAlert(edit ? 'Profile Updated!' :'Profile Created!', 'success'));
+        
+        var notTrue=true;
+        notTrue=!notTrue;
+        
+        console.log('edit', edit, 'notTrue', notTrue);
         if(!edit){
             history.push('/dashboard');
         }
