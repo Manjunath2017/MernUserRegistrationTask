@@ -20,6 +20,9 @@ import store from './store';
 import SetAuthToken from './utils/SetAuthToken'; 
 
 
+import Test from './components/profile-forms/Test';
+
+
 console.log('localStorage.token line 17 app.js', localStorage.token);
 if(localStorage.token){  //// it 'll chceck if token is available
   SetAuthToken(localStorage.token); //if true, call n set token 
@@ -44,6 +47,8 @@ const App=()=>{
         <PrivateRouting exact path='/dashboard' component={Dashboard} />
         <PrivateRouting exact path='/create-profile' component={CreateProfile} />
         <PrivateRouting exact path='/edit-profile' component={EditProfile} />
+
+        <PrivateRouting exact path="/test" component={Test} />
 
         <PrivateRouting exact path='/add-experience' component={addExperience} />    
         <PrivateRouting exact path='/add-education' component={addEducation} />    
