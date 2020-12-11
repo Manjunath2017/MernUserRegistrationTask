@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {
     GET_PROFILE,
+    GET_PROFILES,
     PROFILE_ERROR,
     UPDATE_PROFILE, 
     CLEAR_PROFILE,
@@ -25,6 +26,45 @@ export const getCurrentProfile=()=> async dispatch=>{
         });
     }
 }
+
+
+//Get all profiles
+// /api/profile
+export const getProfiles = () => async dispatch=> {
+    dispatch({type:CLEAR_PROFILE});
+
+    try{
+        const response = await axios.get(`/api/profile`);
+
+        dispatch({
+            type:GET_PROFILES,
+            payload:response.data
+        });
+    }catch(err){
+        dispatch({
+            type:PROFILE_ERROR,
+            payload:{ msg: err.response.status, status:err.response.status}
+        });
+    }
+};
+
+//Get profile by ID
+// /api/profile/${userId}
+export const getProfileById= userId => async dispatch =>{
+    try{
+        const response = await axios.get(`/api/profile/${userId}`);
+
+        dispatch({
+            type:GET_PROFILE,
+            payload:response.data
+        });
+    }catch(err){
+        dispatch({
+            type:PROFILE_ERROR,
+            payload:{ msg: err.response.status, status:err.response.status}
+        });
+    }
+}; 
 
 //Create or update  profile
 // /api/profile
@@ -176,6 +216,7 @@ export const deleteEducation = id => async dispatch =>{
 }
 
 // Delete account and profile
+// /api/profile/
 export const deleteAccount = () => async dispatch =>{
     if(window.confirm('Are you sure? This cannot be undone! ')){
         try {
