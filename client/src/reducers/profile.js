@@ -1,6 +1,7 @@
 import { 
     GET_PROFILE, 
     GET_PROFILES, 
+    GET_REPOSE,
     PROFILE_ERROR, 
     CLEAR_PROFILE, 
     UPDATE_PROFILE, 
@@ -47,6 +48,12 @@ export default (state=initialState, action)=>{
                 ...state,
                 profile:null,
                 repos:[],
+                loading:false
+            }
+        case GET_REPOSE:
+            return {
+                ...state,
+                repos:payload,
                 loading:false
             }
             default:

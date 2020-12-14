@@ -2,6 +2,7 @@ import axios from 'axios';
 import {
     GET_PROFILE,
     GET_PROFILES,
+    GET_REPOSE,
     PROFILE_ERROR,
     UPDATE_PROFILE, 
     CLEAR_PROFILE,
@@ -65,6 +66,22 @@ export const getProfileById= userId => async dispatch =>{
         });
     }
 }; 
+
+export const getGithubRepos =userName =>async dispatch =>{
+    try{
+        const response = await axios.get(`/api/profile/github/${userName}`);
+
+        dispatch({
+            type:GET_REPOSE,
+            payload:response.data
+        });
+    }catch(err){
+        dispatch({
+            type:PROFILE_ERROR,
+            payload: { msg: err.response.status, status:err.response.status}
+        })
+    }
+}
 
 //Create or update  profile
 // /api/profile

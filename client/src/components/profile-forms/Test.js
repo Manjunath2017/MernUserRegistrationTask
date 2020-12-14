@@ -1,8 +1,8 @@
 import React, { useState, Fragment, useEffect } from 'react';
-import {Link, withRouter} from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import {createProfileFn, getCurrentProfile} from '../../actions/profile';
+// import {Link, withRouter} from 'react-router-dom';
+// import PropTypes from 'prop-types';
+// import { connect } from 'react-redux';
+// import {createProfileFn, getCurrentProfile} from '../../actions/profile';
 
 // check, need to add auth?
 const Test = () => {
