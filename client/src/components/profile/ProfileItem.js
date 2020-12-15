@@ -35,7 +35,7 @@ const ProfileItem=({
 };
 
 
-ProfileItem.prototype={
+ProfileItem.propTypes={
   profile: PropTypes.object.isRequired
 }
 

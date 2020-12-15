@@ -13,7 +13,8 @@ npm run dev
     
  admin@mj.com   ---> admin12	
 	  	
- mj1@mj.com 1234567    
+ mj1@mj.com 1234567 
+ mj@mj.com mj1234567   
 
 *) dispatch is a function of the Redux store
 .......................................................................................

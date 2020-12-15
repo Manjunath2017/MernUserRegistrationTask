@@ -8,14 +8,11 @@ import { getProfiles} from '../../actions/profile';
 const Profiles = ({getProfiles, profile: { profiles, loading } }) =>{
   useEffect(() =>{
      getProfiles();
-
-     console.log('getProfiles', getProfiles().data );
+     console.log('getProfiles', getProfiles() );
   }, [getProfiles]);
   
   return (
-
   <Fragment>
-{profiles}
      {loading ? (<Spinner />):(<Fragment> 
          <h1 className="large text-primary">Developers</h1>
          <p className="lead">
@@ -26,8 +23,8 @@ const Profiles = ({getProfiles, profile: { profiles, loading } }) =>{
           (
             profiles.map(profile =>
               ( 
-                // <ProfileItem key={profile._id} profile={profile} />
-              <p>{profile._id}</p>
+                <ProfileItem key={profile._id} profile={profile} />
+              // <p>{profile._id}</p>
               )
             )
           ) : ( <h4>No profile found...</h4> )}

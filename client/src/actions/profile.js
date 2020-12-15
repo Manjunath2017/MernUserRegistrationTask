@@ -13,8 +13,10 @@ import {setAlert} from './alert';
 // Get current users profile
 // /api/profile/me
 export const getCurrentProfile=()=> async dispatch=>{
+// console.log('getCurrentProfile!');
     try{
         const res=await axios.get('/api/profile/me');
+        // console.log(res.data);
         dispatch({
             type:GET_PROFILE,
             payload:res.data
@@ -31,15 +33,18 @@ export const getCurrentProfile=()=> async dispatch=>{
 
 //Get all profiles
 // /api/profile
-export const getProfiles = () => async dispatch=> {
-    dispatch({type:CLEAR_PROFILE});
 
-    try{
-        const response = await axios.get(`/api/profile`);
+export const getProfiles = () => async dispatch => {
+    dispatch({ type: CLEAR_PROFILE });
+
+    try {
+        const res = await axios.get('/api/profile');
+        
+        console.log('action/profile'+res);
 
         dispatch({
-            type:GET_PROFILES,
-            payload:response.data
+            type: GET_PROFILES,
+            payload: res.data
         });
     }catch(err){
         dispatch({
@@ -54,7 +59,7 @@ export const getProfiles = () => async dispatch=> {
 export const getProfileById= userId => async dispatch =>{
     try{
         const response = await axios.get(`/api/profile/${userId}`);
-
+        // console.log(response);
         dispatch({
             type:GET_PROFILE,
             payload:response.data
