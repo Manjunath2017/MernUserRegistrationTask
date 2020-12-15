@@ -5,8 +5,16 @@ import PropTypes from 'prop-types';
 import {logout} from '../../actions/auth';
 
 const NavBar=({auth:{isAuthenticated,loading}, logout})=>{
-   const authLinks=(
+  
+  //authorized user 
+  const authLinks=(
     <ul>
+      <li>
+          <Link to="/profiles">
+          Developers
+          </Link>
+      </li>
+
       <li>
           <Link to="/dashboard">
             <i className="fas fa-user" /> 
@@ -23,9 +31,10 @@ const NavBar=({auth:{isAuthenticated,loading}, logout})=>{
     </ul>
    );
 
+  //Guest User
    const guestLink=(
       <ul>
-        <li><Link to="!#">Developers</Link></li>
+        <li><Link to="/profiles">Developers</Link></li>
         <li><Link to="register">Register</Link></li>
         <li><Link to="login">Login</Link></li>
       </ul>

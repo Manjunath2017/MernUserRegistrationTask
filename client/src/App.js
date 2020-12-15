@@ -11,8 +11,9 @@ import Dashboard from './components/Dashboard/dashboard';
 import PrivateRouting from './components/Routing/PrivateRouting';
 import CreateProfile from './components/profile-forms/CreateProfile';
 import EditProfile from './components/profile-forms/EditProfile';
-import addExperience from './components/profile-forms/AddExperience';
-import addEducation from './components/profile-forms/AddEducation';
+import AddExperience from './components/profile-forms/AddExperience';
+import AddEducation from './components/profile-forms/AddEducation';
+import Profiles from './components/profile/Profiles';
 
 ////Redux
 import {Provider} from 'react-redux';
@@ -25,7 +26,7 @@ import Test from './components/profile-forms/Test';
 
 console.log('localStorage.token line 17 app.js', localStorage.token);
 if(localStorage.token){  //// it 'll chceck if token is available
-  SetAuthToken(localStorage.token); //if true, call n set token 
+  SetAuthToken(localStorage.token); //if true, call and set token 
 }
 const App=()=>{
   useEffect(()=>{  //// check form loc
@@ -44,14 +45,16 @@ const App=()=>{
       <Switch>
         <Route exact path='/login' component={Login} />    
         <Route exact path='/register' component={Register} />    
+        <Route exact path='/profiles' component={Profiles} />
+        
         <PrivateRouting exact path='/dashboard' component={Dashboard} />
         <PrivateRouting exact path='/create-profile' component={CreateProfile} />
         <PrivateRouting exact path='/edit-profile' component={EditProfile} />
 
         <PrivateRouting exact path="/test" component={Test} />
 
-        <PrivateRouting exact path='/add-experience' component={addExperience} />    
-        <PrivateRouting exact path='/add-education' component={addEducation} />    
+        <PrivateRouting exact path='/add-experience' component={AddExperience} />    
+        <PrivateRouting exact path='/add-education' component={AddEducation} />    
       </Switch>
     </section>
   </Fragment>
