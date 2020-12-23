@@ -89,21 +89,21 @@ router.post('/',[auth, [
     }
     // res.send(profileFields.skills);
 });
-//////////////////// POST--> localhost:5000/api/profile///////////////////////////
+//////////////////// end of  POST--> localhost:5000/api/profile///////////////////////////
 
 //// @Route GET localhost:5000/api/profile/
-router.get('/', async(req,res)=>{
+router.get('/', async(request,response)=>{
     try{
         const profiles= await ProfileModel.find()
         .populate('user', ['name', 'avatar']); //get only name and avatar field from user collection
         // console.log(profiles);
-        res.json(profiles);
+        response.send(profiles);
     }catch(error){
         console.error(error.message);
-        res.status(500).send('Server Error!');
+        response.status(500).send('Server Error!');
     }
 });
-//////////////////// GET--> localhost:5000/api/profile///////////////////////////
+//////////////////// end of  GET--> localhost:5000/api/profile///////////////////////////
 
 
 //// @Route GET localhost:5000/api/profile/user/user:user_id/

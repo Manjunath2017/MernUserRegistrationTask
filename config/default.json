@@ -1,3 +1,4 @@
+
 {
     "mongoURI":"mongodb+srv://Manjunath12345:Manjunath12345@cluster0-n9mft.mongodb.net/mernstack?retryWrites=true&w=majority",
     "jwtSecret":"M_&*ThisIsMySecretCode$#!_J",

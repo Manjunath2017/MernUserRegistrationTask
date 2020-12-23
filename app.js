@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 
-app.get('/', (req, res)=> res.send('API running'))
+// app.get('/', (req, res)=> res.send('API running'));
 
 //defile Routers
 app.use('/api/users', require('./router/api/users'));

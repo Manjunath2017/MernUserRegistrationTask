@@ -25,14 +25,14 @@ const Education = ({ education, deleteEducation }) => {
       </td>
     </tr>
   ));
-  console.log(educations, educations.length);
+  // console.log(educations, educations.length);
 
   return (
     <Fragment>
       {educations.length>0?
           (
           <div>
-          <h2 className="my-2"> Education  </h2>
+          <h2 className="my-2"> Education Credentials </h2>
           <table className="table">
             <thead>
               <tr>

@@ -16,37 +16,42 @@ export const getCurrentProfile=()=> async dispatch=>{
 // console.log('getCurrentProfile!');
     try{
         const res=await axios.get('/api/profile/me');
-        // console.log(res.data);
+
+        console.log(res.data);
+
         dispatch({
             type:GET_PROFILE,
             payload:res.data
         });
     }catch(err){
-        console.log(err.response);
+        // console.log(err.response);
+        console.log('errors===> \n',err);
         dispatch({
             type:PROFILE_ERROR,
             payload:{msg:err.response.statusText, status:err.response.status}
         });
     }
-}
+};
 
 
 //Get all profiles
 // /api/profile
 
 export const getProfiles = () => async dispatch => {
-    dispatch({ type: CLEAR_PROFILE });
+    // dispatch({ type: CLEAR_PROFILE });
 
     try {
-        const res = await axios.get('/api/profile');
+        // const res = await axios.get('/api/profile');
+        const res=await axios.get('/api/profile/');
         
-        console.log('action/profile'+res);
+        console.log('action/profile' +res);
 
         dispatch({
             type: GET_PROFILES,
             payload: res.data
         });
     }catch(err){
+        console.log('err===> \n',err);
         dispatch({
             type:PROFILE_ERROR,
             payload:{ msg: err.response.status, status:err.response.status}
@@ -58,7 +63,7 @@ export const getProfiles = () => async dispatch => {
 // /api/profile/${userId}
 export const getProfileById= userId => async dispatch =>{
     try{
-        const response = await axios.get(`/api/profile/${userId}`);
+        const response = await axios.get(`/api/profile/user/${userId}`);
         // console.log(response);
         dispatch({
             type:GET_PROFILE,
@@ -104,10 +109,10 @@ export const createProfileFn=(formData, history, edit=false) => async dispatch=>
         });
         dispatch(setAlert(edit ? 'Profile Updated!' :'Profile Created!', 'success'));
         
-        var notTrue=true;
-        notTrue=!notTrue;
+        // var notTrue=true;
+        // notTrue=!notTrue;
         
-        console.log('edit', edit, 'notTrue', notTrue);
+        // console.log('edit', edit, 'notTrue', notTrue);
         if(!edit){
             history.push('/dashboard');
         }
@@ -145,7 +150,8 @@ export const addExperience=( formData, history)=> async dispatch=>{
         history.push('/dashboard');
     }catch(err){
         const errors=err.response.data.errors; //
-        console.log(errors)
+        console.log('errors===> \n',errors);
+
         if(errors){
             errors.forEach(error=> dispatch(setAlert(error.msg, 'danger'))); //// Vlaidation is done from backend!
         }

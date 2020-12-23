@@ -4,8 +4,10 @@ import {
     GET_REPOSE,
     PROFILE_ERROR, 
     CLEAR_PROFILE, 
-    UPDATE_PROFILE, 
-    ACCOUNT_DELETE } from "../actions/types";
+    UPDATE_PROFILE
+    // , 
+    // ACCOUNT_DELETE
+ } from "../actions/types";
 
 const initialState={
     profile:null,
@@ -19,11 +21,11 @@ export default (state=initialState, action)=>{
     const {type, payload}=action;
 
     switch(type){
-        case ACCOUNT_DELETE:
-            console.log('state: ', state, 'payload:', payload);
-        return{
-            ...state
-        };
+        // case ACCOUNT_DELETE:
+        //     console.log('state: ', state, 'payload:', payload);
+        // return{
+        //     ...state
+        // };
         case GET_PROFILE:
         case UPDATE_PROFILE:
         return {
@@ -41,6 +43,7 @@ export default (state=initialState, action)=>{
             return{
                 ...state,
                 error:payload,
+                profile:null,
                 loading:false
             };
         case CLEAR_PROFILE:
