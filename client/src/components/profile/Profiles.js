@@ -8,7 +8,7 @@ import { getProfiles} from '../../actions/profile';
 const Profiles = ({getProfiles, profile: { profiles, loading } }) =>{
   useEffect(() =>{
      getProfiles();
-     console.log('getProfiles', getProfiles() );
+    //  console.log('getProfiles', getProfiles() );
   }, [getProfiles]);
   
   return (

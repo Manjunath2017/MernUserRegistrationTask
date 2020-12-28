@@ -16,6 +16,7 @@ app.use(bodyParser.json());
 
 //defile Routers
 app.use('/api/users', require('./router/api/users'));
+// use is a method to configure the middleware used by the routes of the Express HTTP server object. 
 
 app.use('/api/auth', require('./router/api/auth'));
 

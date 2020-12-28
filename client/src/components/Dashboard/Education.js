@@ -7,29 +7,11 @@ import { deleteEducation } from '../../actions/profile';
 const Education = ({ education, deleteEducation }) => {
   console.log('education Education.JS', education, '\n deleteEducation ', deleteEducation);
 
-  const educations = education.map(edu =>(
-    <tr key={edu._id}>
-      <td>{edu.school}</td>
-      <td className="hide-sm">{edu.degree}</td>
-      <td>  
-        <Moment format="YYYY/MM/DD">{edu.from}</Moment>
-        {" " }-{" " }
-        {edu.to === null ?(
-          "Now"
-        ):(
-          <Moment format="YYYY/MM/DD">{edu.to}</Moment>
-        )}
-      </td>
-      <td>
-        <button className="btn btn-danger" onClick={()=> deleteEducation(edu._id)}  >Delete</button>
-      </td>
-    </tr>
-  ));
+  // const educations = ;
   // console.log(educations, educations.length);
 
   return (
     <Fragment>
-      {educations.length>0?
           (
           <div>
           <h2 className="my-2"> Education Credentials </h2>
@@ -40,14 +22,32 @@ const Education = ({ education, deleteEducation }) => {
                 <th className="hide-sm">Degree</th>
                 <th className="hide-sm">Years</th>
               </tr>
-               {educations} 
+               {/* {educations}  */}
+               {
+                 education.map(edu =>(
+                  <tr key={edu._id}>
+                    <td>{edu.school}</td>
+                    <td className="hide-sm">{edu.degree}</td>
+                    <td>  
+                      <Moment format="YYYY/MM/DD">{edu.from}</Moment>
+                      {" " }-{" " }
+                      {edu.to === null ?(
+                        "Now"
+                      ):(
+                        <Moment format="YYYY/MM/DD">{edu.to}</Moment>
+                      )}
+                    </td>
+                    <td>
+                      <button className="btn btn-danger" onClick={()=> deleteEducation(edu._id)}  >Delete</button>
+                    </td>
+                  </tr>
+                ))
+               }
             </thead>
           </table>
           </div>
           ):
           ''  
-      }
-
     </Fragment>
   );
 };
