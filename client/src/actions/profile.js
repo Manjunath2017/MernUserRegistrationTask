@@ -36,29 +36,27 @@ export const getCurrentProfile=()=> async dispatch=>{
 
 //Get all profiles
 // /api/profile
-
-export const getProfiles = () => async dispatch => {
-    // dispatch({ type: CLEAR_PROFILE });
-
-    try {
-        // const res = await axios.get('/api/profile');
-        const res=await axios.get('/api/profile/');
-        
-        console.log('action/profile' +res);
-
-        dispatch({
-            type: GET_PROFILES,
-            payload: res.data
-        });
-    }catch(err){
-        console.log('err===> \n',err);
-        dispatch({
-            type:PROFILE_ERROR,
-            payload:{ msg: err.response.status, status:err.response.status}
-        });
-    }
-};
-
+export const getProfiles=()=> async dispatch=>{
+    console.log('GetProfiles!');
+    dispatch({ type: CLEAR_PROFILE });
+        try{
+            const res=await axios.get('/api/profile/');
+    
+            console.log(res.data);
+    
+            dispatch({
+                type:GET_PROFILES,
+                payload:res.data
+            });
+        }catch(err){
+            // console.log(err.response);
+            console.log('errors===> \n',err);
+            dispatch({
+                type:PROFILE_ERROR,
+                payload:{ msg: err.response.status, status:err.response.status}
+            });
+        }
+    };
 //Get profile by ID
 // /api/profile/${userId}
 export const getProfileById= userId => async dispatch =>{

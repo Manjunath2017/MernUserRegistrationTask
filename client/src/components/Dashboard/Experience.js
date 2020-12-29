@@ -5,7 +5,7 @@ import {deleteExperience} from '../../actions/profile';
 import { connect } from 'react-redux';
 
 const Experience = ({ experience, deleteExperience }) => {
-  console.log(experience);
+  // console.log(experience);
   return (
     <Fragment>
       {

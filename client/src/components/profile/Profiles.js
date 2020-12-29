@@ -8,9 +8,9 @@ import { getProfiles} from '../../actions/profile';
 const Profiles = ({getProfiles, profile: { profiles, loading } }) =>{
   useEffect(() =>{
      getProfiles();
-    //  console.log('getProfiles', getProfiles() );
+     console.log('getProfiles');
   }, [getProfiles]);
-  
+  console.log('profile', getProfiles);
   return (
   <Fragment>
      {loading ? (<Spinner />):(<Fragment> 
@@ -18,13 +18,14 @@ const Profiles = ({getProfiles, profile: { profiles, loading } }) =>{
          <p className="lead">
            <i className="fab fa-connectdevelop"></i> Browse and connect with developers
          </p>
-         <div className="profiles">{profiles}
-           {profiles.length > 0?
+         <div className="profiles">
+           {profiles?
           (
             profiles.map(profile =>
               ( 
-                <ProfileItem key={profile._id} profile={profile} />
-              // <p>{profile._id}</p>
+                // <ProfileItem key={profile._id} profile={profile} />
+              
+              <ul><li> <p>{profile}</p> </li></ul>
               )
             )
           ) : ( <h4>No profile found...</h4> )}

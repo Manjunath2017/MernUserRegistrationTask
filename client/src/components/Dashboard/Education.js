@@ -12,7 +12,6 @@ const Education = ({ education, deleteEducation }) => {
 
   return (
     <Fragment>
-          (
           <div>
           <h2 className="my-2"> Education Credentials </h2>
           <table className="table">
@@ -45,11 +44,9 @@ const Education = ({ education, deleteEducation }) => {
                }
             </thead>
           </table>
-          </div>
-          ):
-          ''  
+          </div>  
     </Fragment>
-  );
+  )
 };
 
 Education.propTypes = {
