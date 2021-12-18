@@ -31,7 +31,7 @@ router.post('/',[
     // const testDecode= await bcrypt.decode('$2b$10$A6f9ZoYspO1hG./Hmyi0SOMh.6losl0JBCM0E4SFIPOl4.aV5FpBi');
     // console.log('text auth.js 32 line');
 
-    // console.log(req.body);
+     console.log(req.body);
     const errors=validationResult(req);
     if(!errors.isEmpty()){
         return res.status(400).json({errors:errors.array()});

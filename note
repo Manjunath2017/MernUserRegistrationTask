@@ -1,9 +1,20 @@
+sudo service mongod start
+mongo
+
 dataBase: https://cloud.mongodb.com/v2/5dfcbddccf09a215431affcf#metrics/replicaSet/5ecd740079dc6c13665c3c44/explorer/mernstack/profiles
 ID: manjunath.jadhav1231@
 
 ...........Note.......
 npm run dev
+toDo : edit-profile, protected router not working
 
+new DB --->
+mj@mj.com 1234567
+
+
+
+................................old DB................
+remove comment from reducers/auth.js line 47
 1)without data
 	"email":"w@mjj.com",
 	"password":"1234567"
@@ -11,20 +22,24 @@ npm run dev
  n@mj.com   ---> 1234567
  admin@admin.com  ---> admin12	
     
- admin@mj.com   ---> admin12	
+ admin@mj.com   ---> admin12	  //getting bug no data in experiance table but displays table heading
 	  	
- mj1@mj.com 1234567 
- mj@mj.com mj1234567   
+ mj1@mj.com 1234567 // data 
 
+ dinesh@d.com    dineshdinesh //new
+
+
+
+ mj@mj.com mj1234567   // getting error 
 *) dispatch is a function of the Redux store
 .......................................................................................
 *) Bring current profile( receive props ) 
-
 const mapStateToProps=state => ({
     auth:state.auth,  // get auth state 
     profile:state.profile // get profile state
 });
 
-export default connect(mapStateToProps, {getCurrentProfile, deleteAccount})(Dashboard);
-........................................................................................
 
+export default connect(mapStateToProps, { getProfileById })(Profile)
+// get state= mapStateToProps
+// dispatch= getProfileById

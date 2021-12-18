@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useEffect } from 'react';
+import React, { Fragment } from 'react'
 // import {Link, withRouter} from 'react-router-dom';
 // import PropTypes from 'prop-types';
 // import { connect } from 'react-redux';
@@ -6,17 +6,13 @@ import React, { useState, Fragment, useEffect } from 'react';
 
 // check, need to add auth?
 const Test = () => {
-  console.log('Test');
-
+  console.log('Test')
 
   return (
     <Fragment>
-      <h1 className="large text-primary">
-        Test
-      </h1>
+      <h1 className='large text-primary'>Test</h1>
     </Fragment>
   )
 }
 
-
-export default Test;
+export default Test
