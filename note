@@ -4,6 +4,9 @@ mongo
 dataBase: https://cloud.mongodb.com/v2/5dfcbddccf09a215431affcf#metrics/replicaSet/5ecd740079dc6c13665c3c44/explorer/mernstack/profiles
 ID: manjunath.jadhav1231@
 
+mongosh "mongodb+srv://cluster0.n9mft.mongodb.net/myFirstDatabase" --username Manjunath12345
+mongodb+srv://Manjunath12345:Manjunath12345@cluster0-n9mft.mongodb.net/mernstack?retryWrites=true&w=majority
+
 ...........Note.......
 npm run dev
 toDo : edit-profile, protected router not working
